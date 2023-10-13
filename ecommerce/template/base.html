@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" integrity="sha512-W/zrbCncQnky/EzL+/AYwTtosvrM+YG/V6piQLSe2HuKS6cmbw89kjYkp3tWFn1dkWV7L1ruvJyKbLz73Vlgfg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+<div class="container-fluid"></div>
+    <header>
+    <center>
+        <img src="{% static 'images/eshop1.jpg' %}" height="100px" width="250px">
+    </center>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mt-1" >
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">E-SHOP</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'shop:allprodcat' %}">Home</a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            All Categories
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              {% for i in links %}
+            <li><a class="dropdown-item" href="{% url 'shop:allproduct' i.cname %}">{{i.cname}}</a></li>
+              {% endfor %}
+
+          </ul>
+
+            {% if user.is_authenticated %}
+            {% if user.is_superuser != True %}
+            <li class="nav-item">
+          <a class="nav-link" href="{% url 'cart:cart_view'%}"><i class="fa fa-cart-arrow-down" aria-hidden="true">{{count}}</i></a>
+        </li>
+                    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="{% url 'cart:your_orders' %}">Your orders</a>
+        </li>
+            {% endif %}
+             <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'shop:logout' %}">Logout</a>
+        </li>
+
+            {% else %}
+            <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'shop:register' %}">Register</a>
+        </li>
+            <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'shop:login' %}">Login</a>
+        </li>
+            {% endif %}
+        </li>
+
+        </li>
+        </ul>
+        <form class="d-flex" method="POST" action="{% url 'search:searchresult' %}">
+            {% csrf_token%}
+        <input class="form-control me-2" type="search" name="q" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+        </div>
+        </div>
+    </nav>
+    </header>
+{% block content %}
+{% endblock %}
+    <footer>
+        <div class="footer">
+            <p><i class="fa-regular fa-copyright" aria-hidden="true"></i>E-shop Private Limited.All rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div>
+    <img src="{% static 'images/banner3.jpg' %}" height="450px" width="100%">
+</div>
+
+<div class="container-fluid mt-4" style="margin-bottom:100px;">
+    <h3 class="text-center mb-2">Our collection</h3>
+    <p style="text-align:justify;line-height:2;">'''An ecommerce app allows users to shop online, browse product catalogs, create wish lists, add items to a cart, and complete purchases.
+        It also provides payment processing, shipping, and order management capabilities.Amazon is an online marketplace where customers can buy a variety of products from sellers all over the world.
+        Customers can purchase items from the app and have them delivered to their home or office. Amazon also offers Amazon Prime, which gives customers access to free two-day shipping and other benefits such as Prime Video and Prime Music.'''</p>
+</div>
+<div class="container-fluid mt-5" style="margin-bottom:60px;">
+    <h3 class="text-center mb-2 text-uppercase">{{category.cname}}</h3>
+    <p style="text-align:justify;line-height:1.7;">{{category.description}}</p>
+</div>
+<div class="container-fliud mt-5"  style="margin-bottom:100px;">
+    <div class="row">
+        {% for i in c %}
+        <div class="col-sm-4">
+            <div class="card" style="width:25rem;height:35rem">
+                <img src="{{i.image.url}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                     <h5 class="card-title"{{i.cname}}></h5>
+                    <p class="card=-text">{{i.description}}</p>
+                    <a href="{% url 'shop:allproduct' i.cname %}" style="position:relative;left:20px;" class="btn btn-primary">PRODUCT</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

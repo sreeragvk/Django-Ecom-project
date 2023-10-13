@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h1 style="text-align:center;font-family:Times New Roman Times, serif;">Register</h1>
+<form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Username</label>
+  <input type="text" class="form-control" id="exampleFormControlInput1" name="u" placeholder="enter username">
+    </div>
+    <div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">password</label>
+  <input type="password" class="form-control" id="exampleFormControlInput1" name="p1" placeholder="enter password">
+</div>
+    <div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">confirm password</label>
+  <input type="password" class="form-control" id="exampleFormControlInput1" name="p2" placeholder="confirm password">
+</div>
+        <div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">First name</label>
+  <input type="text" class="form-control" id="exampleFormControlInput1" name="f" placeholder="enter firstname">
+</div>
+        <div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">last name</label>
+  <input type="text" class="form-control" id="exampleFormControlInput1" name="l" placeholder="enter lastname">
+</div>
+        <div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Email</label>
+  <input type="email" class="form-control" id="exampleFormControlInput1" name="e" placeholder="name@example.com">
+</div>
+    <div class="mb-5">
+        <input type="submit" class="form-control">
+    </div>
+
+
+</form>
+
+{% endblock %}
